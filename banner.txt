@@ -1,0 +1,5 @@
+// ==========================================================================
+// Project:   Ember Validatable
+// Copyright: ©2013 James Harton and contributors.
+// License:   Licensed under MIT license (see license.js)
+// ==========================================================================
