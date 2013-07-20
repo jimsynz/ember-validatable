@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Ember Validatable (EM) is a simple and lightweight validation library for Ember.
+Ember Validatable is a simple and lightweight validation library for Ember.
 
 ## Validations
 Validations are added to a model by defining properties ending in either `Validator` or `Validators`.
