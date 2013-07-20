@@ -1,9 +1,9 @@
 module.exports = {
   options: {
     filepathTransform: function(filepath) {
-      filepath.replace('ember-model', 'ember-model/lib');
-      return 'packages/' + filepath.replace('ember-model', 'ember-model/lib');
+      filepath.replace('ember-validatable', 'ember-validatable/lib');
+      return 'packages/' + filepath.replace('ember-validatable', 'ember-validatable/lib');
     }
   },
-  'dist/ember-model.js': 'packages/ember-model/lib/main.js'
+  'dist/ember-validatable.js': 'packages/ember-validatable/lib/main.js'
 };

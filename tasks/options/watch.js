@@ -3,11 +3,11 @@ module.exports = {
     nospawn: true,
   },
   code: {
-    files: ['packages/ember-model/lib/**/*.js'],
+    files: ['packages/ember-validatable/lib/**/*.js'],
     tasks: ['jshint:development', 'neuter'],
   },
   test: {
-    files: ['packages/ember-model/tests/**/*.js'],
+    files: ['packages/ember-validatable/tests/**/*.js'],
     tasks: ['jshint:development', 'build_test_runner_file'],
   }
 };

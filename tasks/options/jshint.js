@@ -1,4 +1,4 @@
-var files = ['Gruntfile.js', 'packages/ember-model/**/*.js'];
+var files = ['Gruntfile.js', 'packages/ember-validatable/**/*.js'];
 
 module.exports = {
   options: {

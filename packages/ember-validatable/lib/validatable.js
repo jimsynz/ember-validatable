@@ -9,7 +9,9 @@ Ember.Validatable = Ember.Mixin.create({
   }.property(),
 
   didDefineProperty: function(proto, key, value) {
-    this._super();
+    if (this._super) {
+      this._super();
+    }
 
     if (proto.get('isInstance')) { proto = proto.constructor; }
 

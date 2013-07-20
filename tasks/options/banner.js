@@ -4,10 +4,10 @@ module.exports = {
   },
 
   production: {
-    src : 'dist/ember-model.prod.js',
+    src : 'dist/ember-validatable.prod.js',
   },
   
   minified: {
-    src: 'dist/ember-model.min.js'
+    src: 'dist/ember-validatable.min.js'
   }
 };

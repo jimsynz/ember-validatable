@@ -4,10 +4,10 @@ module.exports = function(grunt){
   grunt.registerMultiTask('banner', 'Append a banner to production', function(){
     var done = this.async(),
         task = this;
-    exec('git describe --tags', 
+    exec('git describe --tags',
       function(tags_error, tags_stdout, tags_stderr) {
         var tags =  tags_stdout;
-        exec('git log -n 1 --format="%h (%ci)"', 
+        exec('git log -n 1 --format="%h (%ci)"',
           function(sha_error, sha_stdout, sha_stderr) {
             var sha  = sha_stdout,
                 banner = '';
