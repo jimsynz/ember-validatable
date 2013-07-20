@@ -38,3 +38,4 @@ Other properties available are:
   - `error` - by default this concatenates `targetKey` and `message`. The result of this will be placed
     in your models `errors` array property.
 
+
