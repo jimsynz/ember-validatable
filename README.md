@@ -38,4 +38,41 @@ Other properties available are:
   - `error` - by default this concatenates `targetKey` and `message`. The result of this will be placed
     in your models `errors` array property.
 
+### Validating multiple properties
 
+Sometimes you might want to validate a selection of properties together.  You might be tempted to
+reach into `target` and get the properties you need, but this would be unwise, as these additional
+properties will not have the validator's observer configured against them, instead it's best
+to create a computed property and validate that:
+
+```javascript
+var TimeTravelValidator = Ember.Validator.extend({
+  error: null,
+  isValid: function() {
+    var speed = this.get('target.speed');
+    var power = this.get('target.powerLevel');
+    if (speed < 88) {
+      this.set('error', 'Must be travelling at least 88mph to engage the flux capacitor');
+      return false;
+    }
+    if (power < 1210000000) { // 1.21GW
+      this.set('error', 'We need at least 1.21 giga-watts of available power to engage the flux capacitor');
+      return false;
+    }
+    return true;
+  }.property('content')
+});
+
+App.Delorean = Ember.Object.extend(Ember.Validatable, {
+  speed: '17mph',
+  powerLevel: '99000000',
+
+  fluxCapacitorRequirements: function() {
+    // Technically, we can return anything here, as long as it
+    // triggers.
+    return [ this.get('speed'), this.get('powerLevel') ];
+  }.property('speed', 'powerLevel'),
+
+  fluxCapacitorRequirementsValidator: TimeTravelValidator
+});
+```
