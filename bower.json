@@ -1,6 +1,6 @@
 {
   "name": "ember-validatable",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./ember-validatable.js",
   "dependencies": {
     "ember": "~1.0.0-rc.5",
