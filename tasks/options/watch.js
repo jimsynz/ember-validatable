@@ -8,6 +8,6 @@ module.exports = {
   },
   test: {
     files: ['packages/ember-validatable/tests/**/*.js'],
-    tasks: ['jshint:development', 'build_test_runner_file'],
+    tasks: ['jshint:development', 'build_test_runner_file', 'qunit:cli'],
   }
 };
