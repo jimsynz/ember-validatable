@@ -1,36 +1,45 @@
 require('validator');
 
+var get = Ember.get;
+
+var validationsFor = function(proto) {
+  var meta        = Ember.meta(proto);
+  var validations = get(meta, 'validations');
+  if ('undefined' === typeof validations) {
+    validations = Ember.A();
+    Ember.set(meta, 'validations', validations);
+  }
+  return validations;
+};
+
 Ember.Validatable = Ember.Mixin.create({
-  _validations: function() {
-    var _this = this;
-    return this.constructor.validators.map(function(item) {
-      return item.validator.create({target: _this, targetKey: item.targetKey});
-    });
-  }.property(),
+  init: function() {
+    if (this._super) { this._super(); }
+
+    this.set('_validationConfigs', validationsFor(this.constructor));
+  },
+
+  _validations: Ember.computed.map('_validationConfigs', function(config) {
+    return config.validator.create({target: this, targetKey: config.targetKey});
+  }),
 
   didDefineProperty: function(proto, key, value) {
-    if (this._super) {
-      this._super();
+    var targetKey = key.replace(/Validators?$/, '');
+    var validations;
+
+    if (this._super)                        { this._super(); }
+    if (Ember.typeOf(proto) === 'instance') { proto = proto.constructor; }
+
+    validations = validationsFor(proto);
+
+    if (/Validator$/.test(key)) {
+      validations.pushObject({targetKey: targetKey, validator: value});
     }
-
-    if (proto.get('isInstance')) { proto = proto.constructor; }
-
-    if (/Validators?$/.test(key)) {
-      var targetKey = key.replace(/Validators?$/, '');
-      var validators = proto.validators || [];
-
-      if (/Validator$/.test(key)) {
-        validators.pushObject({targetKey: targetKey, validator: value});
-      }
-      if (/Validators$/.test(key)) {
-        value.each(function(item) {
-          validators.pushObject({targetKey: targetKey, validator: item});
-        });
-      }
-
-      proto.validators = validators;
+    if (/Validators$/.test(key)) {
+      value.forEach(function(item) {
+        validations.pushObject({targetKey: targetKey, validator: item});
+      });
     }
-
   },
 
   errors: function() {

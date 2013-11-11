@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "main": "./ember-validatable.js",
   "dependencies": {
-    "ember": "~1.0.0-rc.5",
+    "ember": "~1.1.0",
     "handlebars": "~1.0.0-rc.4",
     "jquery": "~1.9.1",
     "ember-model": "~0.0.7"

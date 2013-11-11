@@ -18,7 +18,7 @@ var TimeTravelValidator = Ember.Validator.extend({
       return false;
     }
     return true;
-  }.property('content')
+  }.property('target.speed', 'target.powerLevel')
 });
 
 var Delorean = Ember.Model.extend(Ember.Validatable, {
@@ -40,7 +40,11 @@ test('it should be valid when set with the correct data', function() {
   var delorean = Delorean.create({speed: '17mph', powerLevel: 99000000});
   ok(delorean.get('isInvalid'));
 
-  delorean.set('speed', '88mph');
-  delorean.set('powerLevel', 1210000000);
+  Ember.run(function() {
+    delorean.set('speed', '88mph');
+    delorean.set('powerLevel', 1210000000);
+    delorean.get('fluxCapacitorRequirements');
+  });
+
   ok(delorean.get('isValid'));
 });
